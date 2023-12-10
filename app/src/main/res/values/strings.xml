@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">Search_Image</string>
+    <string name="app_name">Search Image</string>
+    <string name="title_search">검색 결과</string>
+    <string name="title_bookmark">내 보관함</string>
 </resources>
