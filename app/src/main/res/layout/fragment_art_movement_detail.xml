@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#121212">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Image pager (좌우 스크롤) -->
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/imagePager"
+                android:layout_width="match_parent"
+                android:layout_height="500dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/cardview_all_round"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <!-- Movement Title -->
+                    <TextView
+                        android:id="@+id/title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Renaissance"
+                        android:textColor="#DFD7C3"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                    <!-- Period -->
+                    <TextView
+                        android:id="@+id/period"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1300 - 1600"
+                        android:textColor="#DFD7C3"
+                        android:textSize="14sp"
+                        android:layout_marginTop="4dp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:layout_centerInParent="true"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="16dp"
+                        android:background="#DFD7C3"/>
+
+                    <!-- Description -->
+                    <TextView
+                        android:id="@+id/description"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="The Renaissance was a pivotal movement in European history, spanning from the 14th to the 17th century..."
+                        android:textColor="#DFD7C3"
+                        android:textSize="14sp"
+                        android:maxLines="4"
+                        android:ellipsize="end" />
+
+                    <!-- Show more -->
+                    <TextView
+                        android:id="@+id/showMore"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Show more"
+                        android:textColor="#FF4D27"
+                        android:textStyle="bold"
+                        android:layout_marginTop="4dp" />
+
+                    <!-- Highlight artist -->
+                    <TextView
+                        android:id="@+id/highlightArtist"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Highlight artist"
+                        android:textColor="#DFD7C3"
+                        android:textSize="16sp"
+                        android:layout_marginTop="16dp" />
+                </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</layout>

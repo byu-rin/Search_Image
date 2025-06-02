@@ -1,4 +1,4 @@
-package com.byurin
+package com.ai_curator
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
