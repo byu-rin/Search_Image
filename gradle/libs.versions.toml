@@ -1,6 +1,6 @@
 [versions]
 coreKtx = "1.16.0"
-appcompat = "1.7.0"
+appcompat = "1.7.1"
 material = "1.12.0"
 constraintLayout = "2.2.1"
 navigation = "2.9.0"
@@ -24,7 +24,7 @@ hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt
 
 [plugins]
 # hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+# ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 
 
 #[versions]

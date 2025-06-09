@@ -1,4 +1,4 @@
-package com.byurin
+package com.ai_curator
 
 import org.junit.Test
 
