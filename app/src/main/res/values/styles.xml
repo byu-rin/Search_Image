@@ -3,14 +3,14 @@
 
     <!-- To see how these attributes are used, please visit https://material.io/develop/android/theming/color/ -->
     <style name="Base.Theme.AiCurator" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="colorPrimary">@color/ai_curator_green_500</item>
-        <item name="colorOnPrimary">@color/ai_curator_yellow_500</item>
-        <item name="colorPrimaryDark">@color/ai_curator_green_700</item>
-        <item name="colorOnSurface">@color/ai_curator_black</item>
-        <item name="colorAccent">@color/ai_curator_green_700</item>
-        <item name="colorSurface">@color/ai_curator_gray_50</item>
-        <item name="colorSecondary">@color/ai_curator_yellow_500</item>
-        <item name="android:colorBackground">@color/ai_curator_green_500</item>
+        <item name="colorPrimary">@color/ai_curator_black_500</item>
+        <item name="colorOnPrimary">@color/ai_curator_gray_500</item>
+        <item name="colorPrimaryDark">@color/ai_curator_black_500</item>
+        <item name="colorOnSurface">@color/ai_curator_cream</item>
+        <item name="colorAccent">@color/ai_curator_orange</item>
+        <item name="colorSurface">@color/ai_curator_gray_500</item>
+        <item name="colorSecondary">@color/ai_curator_gray_500</item>
+        <item name="android:colorBackground">@color/ai_curator_black_500</item>
     </style>
 
     <style name="Theme.AICurator" parent="Base.Theme.AiCurator"/>

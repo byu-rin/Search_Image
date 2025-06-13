@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="@color/ai_curator_black_500"
     android:padding="16dp">
 
     <!-- Back Arrow -->
@@ -23,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Art movements"
-        android:textColor="@color/cream"
+        android:textColor="@color/ai_curator_cream"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/backButton"
@@ -48,8 +48,8 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:hint="Search"
-            android:textColor="@color/cream"
-            android:textColorHint="@color/cream"
+            android:textColor="@color/ai_curator_cream"
+            android:textColorHint="@color/ai_curator_cream"
             android:background="@drawable/searchbar_all_round"
             android:padding="12dp"
             android:drawableEnd="@drawable/ic_search"

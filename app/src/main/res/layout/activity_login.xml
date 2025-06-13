@@ -36,7 +36,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/cream"
+            android:textColor="@color/ai_curator_cream"
             android:textSize="28sp"
             android:text="Hi there!\nWelcome Back" />
 
@@ -46,8 +46,8 @@
             android:layout_height="wrap_content"
             android:hint="Your Code"
             android:background="@drawable/edittext_background"
-            android:textColor="@color/cream"
-            android:textColorHint="@color/gray"
+            android:textColor="@color/ai_curator_cream"
+            android:textColorHint="@color/ai_curator_gray_500"
             android:inputType="text"
             android:layout_marginTop="32dp"
             android:padding="12dp" />
@@ -58,7 +58,7 @@
             android:layout_height="wrap_content"
             android:text="Log In"
             android:background="@drawable/button_background"
-            android:textColor="@color/gray"
+            android:textColor="@color/ai_curator_gray_500"
             android:textStyle="bold"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp" />
