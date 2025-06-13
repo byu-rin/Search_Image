@@ -13,6 +13,14 @@
         android:theme="@style/Theme.Search_Image"
         tools:targetApi="31">
         <activity
+            android:name=".ArtMovementDetailActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="Search Image">
@@ -23,5 +31,4 @@
             </intent-filter>
         </activity>
     </application>
-
 </manifest>
