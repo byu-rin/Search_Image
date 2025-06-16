@@ -4,4 +4,5 @@
     <color name="ai_curator_gray_500">#363636</color>
     <color name="ai_curator_orange">#FF4D27</color>
     <color name="ai_curator_cream">#DFD7C3</color>
+    <color name="ai_curator_transparent">#FFFFFF</color>
 </resources>
