@@ -6,9 +6,10 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.ai_curator.databinding.ItemImageBinding
 
-class ItemAdapter(
+// viewPager2 imageSlider adapter
+class DetailItemAdapter(
     private val imageList: List<Int>
-) : RecyclerView.Adapter<ItemAdapter.PagerViewHolder>() {
+) : RecyclerView.Adapter<DetailItemAdapter.PagerViewHolder>() {
 
     inner class PagerViewHolder(private val binding: ItemImageBinding) : RecyclerView.ViewHolder(binding.root) {
         val imageView: ImageView = binding.imageView

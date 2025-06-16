@@ -3,7 +3,7 @@ package com.ai_curator
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
-import com.ai_curator.data.ItemAdapter
+import com.ai_curator.data.DetailItemAdapter
 import com.ai_curator.databinding.ActivityArtMovementDetailBinding
 
 class ArtMovementDetailActivity : AppCompatActivity() {
@@ -25,7 +25,7 @@ class ArtMovementDetailActivity : AppCompatActivity() {
             R.drawable.download_3,
             R.drawable.download_4,
         )
-        val adapter = ItemAdapter(images)
+        val adapter = DetailItemAdapter(images)
         viewPager2.adapter = adapter
     }
 }
