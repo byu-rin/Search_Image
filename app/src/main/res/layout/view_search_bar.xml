@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/searchBar"
+    android:layout_width="match_parent"
+    android:layout_height="48dp">
+
+    <EditText
+        android:id="@+id/searchEditText"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:hint="  Search"
+        android:background="@drawable/searchbar_all_round"
+        android:textColor="@color/ai_curator_cream"
+        android:textColorHint="@color/ai_curator_cream"
+        android:fontFamily="@font/noto_sans_mono" />
+
+    <ImageView
+        android:id="@+id/filterIcon"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_gravity="end|center_vertical"
+        android:layout_marginEnd="12dp"
+        android:src="@drawable/ic_search" />
+</FrameLayout>
