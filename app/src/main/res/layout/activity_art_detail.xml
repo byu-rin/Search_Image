@@ -47,11 +47,11 @@
 
                 <!-- Period -->
                 <TextView
-                    android:id="@+id/period"
+                    android:id="@+id/artist"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:text="1300 - 1600"
+                    android:text="artist_name"
                     android:textColor="@color/ai_curator_cream"
                     android:textSize="14sp" />
 

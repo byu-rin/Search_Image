@@ -5,7 +5,7 @@
     android:id="@+id/login_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/paint_ex">
+    android:background="@drawable/sim_yeon_parksoyeong">
 
         <ImageView
             android:layout_width="match_parent"
@@ -15,7 +15,7 @@
             android:layout_marginEnd="4dp"
             android:layout_marginStart="4dp"
             android:contentDescription="backgroud image"
-            android:src="@drawable/paint_ex"
+            android:src="@drawable/sim_yeon_parksoyeong"
             android:scaleType="centerCrop"
             tools:context=".LoginActivity">
         </ImageView>

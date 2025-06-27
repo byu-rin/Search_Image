@@ -9,5 +9,5 @@
         android:layout_height="match_parent"
         android:contentDescription="detail image view"
         android:scaleType="centerCrop"
-        android:src="@drawable/paint_ex"/>
+        android:src="@drawable/sim_yeon_parksoyeong"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
