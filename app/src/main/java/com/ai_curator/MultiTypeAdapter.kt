@@ -8,7 +8,7 @@ import com.ai_curator.databinding.ItemRecyclerviewBinding
 
 class MultiTypeAdapter(
     private val itemList: List<ArtWorkItem>,
-    private val viewType: ViewType
+//    private val viewType: ViewType
 ) : RecyclerView.Adapter<ArtWorkItemView>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArtWorkItemView {

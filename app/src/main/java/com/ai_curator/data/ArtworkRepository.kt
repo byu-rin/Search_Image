@@ -1,7 +1,6 @@
 package com.ai_curator.data
 
 import com.ai_curator.R
-import com.ai_curator.data.ArtworkRepository.artworks
 
 object ArtworkRepository {
     val artworks: List<Artwork> = listOf(
