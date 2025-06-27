@@ -8,6 +8,7 @@ import com.ai_curator.databinding.ItemRecyclerviewBinding
 
 class MultiTypeAdapter(
     private val itemList: List<ArtWorkItem>,
+    imageSlider: ViewType,
 //    private val viewType: ViewType
 ) : RecyclerView.Adapter<ArtWorkItemView>() {
 

@@ -20,7 +20,10 @@ abstract class ArtWorkItemView(itemView: View) : RecyclerView.ViewHolder(itemVie
 }
 
 // Category ArtProfile ViewHolder
-class ArtProfileViewHolder(private val binding: ItemRecyclerviewBinding) : ArtWorkItemView(binding.root) {
+class ArtProfileViewHolder(
+    private val binding: ItemRecyclerviewBinding
+) : ArtWorkItemView(binding.root) {
+
     override fun bind(item: ArtWorkItem) {
         val profile = item as? ArtProfile ?: return // 안전 캐스팅
         binding.ivImage.setImageResource(profile.imageResId)

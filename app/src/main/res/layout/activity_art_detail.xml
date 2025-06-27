@@ -95,14 +95,22 @@
                     android:textColor="@color/ai_curator_cream"
                     android:textSize="16sp" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/otherArtworksRecyclerView"
+                <HorizontalScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="120dp"
+                    android:overScrollMode="never"
+                    android:layout_marginTop="8dp"
+                    android:scrollbars="none"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                <LinearLayout
+                    android:id="@+id/otherArtworksLinearLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" />
+                </HorizontalScrollView>
             </LinearLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
