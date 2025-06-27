@@ -35,9 +35,9 @@ class MultiTypeAdapter(
     }
 
     override fun getItemViewType(position: Int): Int {
-        return when (viewType) {
-            ViewType.ART_PROFILE -> ViewType.ART_PROFILE.ordinal
-            ViewType.IMAGE_SLIDER -> ViewType.IMAGE_SLIDER.ordinal
+        return when (itemList[position]) {
+            is ArtProfile -> ViewType.ART_PROFILE.ordinal
+            is ImageItem -> ViewType.IMAGE_SLIDER.ordinal
             else -> throw IllegalArgumentException("Unknown view type")
         }
     }

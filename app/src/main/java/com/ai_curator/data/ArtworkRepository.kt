@@ -113,7 +113,3 @@ object ArtworkRepository {
         )
     )
 }
-
-fun getArtworkById(id: String): Artwork? {
-    return artworks.find { it.id == id }
-}

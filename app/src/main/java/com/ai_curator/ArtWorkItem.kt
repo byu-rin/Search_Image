@@ -7,7 +7,7 @@ import com.ai_curator.databinding.ItemRecyclerviewBinding
 
 interface ArtWorkItem
 
-data class ArtProfile(val imageResId: Int, val name: String) : ArtWorkItem
+data class ArtProfile(val imageResId: Int, val name: String?) : ArtWorkItem
 
 data class ImageItem(val imageResId: Int) : ArtWorkItem
 
@@ -21,9 +21,8 @@ abstract class ArtWorkItemView(itemView: View) : RecyclerView.ViewHolder(itemVie
 
 // Category ArtProfile ViewHolder
 class ArtProfileViewHolder(private val binding: ItemRecyclerviewBinding) : ArtWorkItemView(binding.root) {
-
     override fun bind(item: ArtWorkItem) {
-        val profile = item as ArtProfile
+        val profile = item as? ArtProfile ?: return // 안전 캐스팅
         binding.ivImage.setImageResource(profile.imageResId)
         binding.tvName.text = profile.name
     }
@@ -32,6 +31,7 @@ class ArtProfileViewHolder(private val binding: ItemRecyclerviewBinding) : ArtWo
 // Detail ImageSlider ArtImage ViewHolder
 class ImageSliderViewHolder(private val binding: ItemImageBinding) : ArtWorkItemView(binding.root) {
     override fun bind(item: ArtWorkItem) {
-        binding.imageView
+        val imageItem = item as? ImageItem ?: return // 안전 캐스팅
+        binding.imageView.setImageResource(imageItem.imageResId)
     }
 }
