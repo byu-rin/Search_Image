@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.ai_curator.data.ArtworkRepository
 import com.ai_curator.databinding.ActivityArtDetailBinding
 
 class ArtDetailActivity : androidx.appcompat.app.AppCompatActivity() {
@@ -15,24 +16,16 @@ class ArtDetailActivity : androidx.appcompat.app.AppCompatActivity() {
         binding = ActivityArtDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val artworks = ArtworkRepository.artworks
+
         // image slider 용 viewpager2
-        val imageItems: List<ArtWorkItem> = listOf(
-            ImageItem(R.drawable.download_1),
-            ImageItem(R.drawable.download_2),
-            ImageItem(R.drawable.download_3),
-            ImageItem(R.drawable.download_4)
-        )
-        val pagerAdapter = MultiTypeAdapter(imageItems, ViewType.IMAGE_SLIDER)
+        val pagerItems = artworks.map { ImageItem(it.artImage.first()) }
+        val pagerAdapter = MultiTypeAdapter(pagerItems, ViewType.IMAGE_SLIDER)
         binding.imagePager.adapter = pagerAdapter
 
         // RecyclerView (가로 스크롤) 세팅
-        val otherWorks: List<ArtWorkItem> = listOf(
-            ArtProfile(R.drawable.download_1, "작품 A"),
-            ArtProfile(R.drawable.download_2, "작품 B"),
-            ArtProfile(R.drawable.download_3, "작품 C")
-        )
-        val horizontalAdapter = MultiTypeAdapter(otherWorks, ViewType.ART_PROFILE)
-
+        val otherWorksItems = artworks.map { ArtProfile(it.artImage.first(), null) }
+        val horizontalAdapter = MultiTypeAdapter(otherWorksItems, ViewType.ART_PROFILE)
         binding.otherArtworksRecyclerView.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.otherArtworksRecyclerView.adapter = horizontalAdapter

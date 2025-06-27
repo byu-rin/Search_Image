@@ -12,8 +12,8 @@ class MultiTypeAdapter(
 ) : RecyclerView.Adapter<ArtWorkItemView>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArtWorkItemView {
-        return when (this.viewType) {
-            ViewType.ART_PROFILE -> {
+        return when (viewType) {
+            ViewType.ART_PROFILE.ordinal -> {
                 val binding = ItemRecyclerviewBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
@@ -21,17 +21,25 @@ class MultiTypeAdapter(
                 )
                 ArtProfileViewHolder(binding)
             }
-
-            ViewType.IMAGE_SLIDER -> {
+            ViewType.IMAGE_SLIDER.ordinal -> {
                 val binding =
                     ItemImageBinding.inflate(LayoutInflater.from(parent.context), parent, false)
                 ImageSliderViewHolder(binding)
             }
+            else -> throw IllegalArgumentException("Invalid view type")
         }
     }
 
     override fun onBindViewHolder(holder: ArtWorkItemView, position: Int) {
         holder.bind(itemList[position])
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return when (viewType) {
+            ViewType.ART_PROFILE -> ViewType.ART_PROFILE.ordinal
+            ViewType.IMAGE_SLIDER -> ViewType.IMAGE_SLIDER.ordinal
+            else -> throw IllegalArgumentException("Unknown view type")
+        }
     }
 
     override fun getItemCount() = itemList.size

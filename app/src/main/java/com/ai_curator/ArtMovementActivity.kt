@@ -3,6 +3,7 @@ package com.ai_curator
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
+import com.ai_curator.data.ArtworkRepository
 import com.ai_curator.databinding.ActivityArtMovementBinding
 
 class ArtMovementActivity : AppCompatActivity() {
@@ -12,17 +13,11 @@ class ArtMovementActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val artProfileList: List<ArtWorkItem> = listOf(
-            ArtProfile(R.drawable.download_1, "한국화"),
-            ArtProfile(R.drawable.download_2, "서양화"),
-            ArtProfile(R.drawable.download_3, "서예"),
-            ArtProfile(R.drawable.download_4, "시각디자인"),
-            ArtProfile(R.drawable.download_1, "산업디자인"),
-            ArtProfile(R.drawable.download_2, "금속디자인"),
-            ArtProfile(R.drawable.download_3, "입체조형")
-        )
+        val artworks = ArtworkRepository.artworks
 
-        binding.movementGrid.adapter = MultiTypeAdapter(artProfileList, ViewType.ART_PROFILE)
+        val artProfileItems = artworks.map { ImageItem(it.artImage.first()) }
+        val artProfileAdapter = MultiTypeAdapter(artProfileItems, ViewType.ART_PROFILE)
+        binding.movementGrid.adapter = artProfileAdapter
         binding.movementGrid.layoutManager = GridLayoutManager(this, 2)
         binding.movementGrid.addItemDecoration(
             GridSpacingItemDecoration(
