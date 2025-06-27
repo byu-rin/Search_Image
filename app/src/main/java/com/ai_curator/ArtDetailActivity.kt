@@ -1,14 +1,9 @@
 package com.ai_curator
 
-import android.graphics.Rect
 import android.os.Bundle
-import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
-import androidx.core.view.get
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.ai_curator.data.ArtworkRepository
 import com.ai_curator.databinding.ActivityArtDetailBinding
 

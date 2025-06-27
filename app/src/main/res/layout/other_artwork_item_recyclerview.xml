@@ -17,6 +17,7 @@
 
         <ImageView
             android:id="@+id/artImage"
+            android:contentDescription="other artwork image"
             android:scaleType="centerCrop"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
