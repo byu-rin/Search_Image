@@ -1,16 +1,21 @@
 package com.ai_curator
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
+import com.ai_curator.databinding.ActivityArtDetailBinding
+import com.ai_curator.databinding.ActivityMainBinding
 import com.ai_curator.databinding.ItemImageBinding
 import com.ai_curator.databinding.ItemRecyclerviewBinding
+import dagger.Binds
+import java.util.Collections.list
 
 class MultiTypeAdapter(
     private val itemList: List<ArtWorkItem>,
-
     private val viewType: ViewType
-    // imageSlider: ViewType
 ) : RecyclerView.Adapter<ArtWorkItemView>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArtWorkItemView {

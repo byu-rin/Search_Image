@@ -1,5 +1,6 @@
 package com.ai_curator
 
+import android.R.attr.name
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
@@ -13,11 +14,14 @@ class ArtMovementActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val artworks = ArtworkRepository.artworks
+        // RecyclerView 에 쓸 ArtProfile 데이터 생성
+        val artProfileItems = ArtworkRepository.artworks
+            .flatMap { artwork ->
+                artwork.artistImage.map { imageResId ->
+                    ArtProfile(imageResId, artwork.artist) } }
 
-        val artProfileItems = artworks.map { ImageItem(it.artImage.first()) }
-        val artProfileAdapter = MultiTypeAdapter(artProfileItems, ViewType.ART_PROFILE)
-        binding.movementGrid.adapter = artProfileAdapter
+        val adapter = MultiTypeAdapter(artProfileItems, ViewType.ART_PROFILE)
+        binding.movementGrid.adapter = adapter
         binding.movementGrid.layoutManager = GridLayoutManager(this, 2)
         binding.movementGrid.addItemDecoration(
             GridSpacingItemDecoration(
