@@ -11,6 +11,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
@@ -25,8 +26,8 @@ class ArtMovementActivityTest {
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
-    // Test 용 코루틴 디스패처(기본적으론 UI 디스패처 대체 목적)
-    private val testDispatcher = StandardTestDispatcher()
+    // ✅ UI 접근 가능하게 UnconfinedTestDispatcher 사용
+    private val testDispatcher = UnconfinedTestDispatcher()
 
     // 테스트 실행 전에 호출되는 메서드
     @Before
@@ -48,9 +49,6 @@ class ArtMovementActivityTest {
         val intent = Intent(ApplicationProvider.getApplicationContext(), ArtMovementActivity::class.java)
         val scenario = ActivityScenario.launch<ArtMovementActivity>(intent)
 
-        // Activity 생명주기를 RESUMED 상태로 이동 (onResume() 이후 상태)
-        scenario.moveToState(Lifecycle.State.RESUMED)
-
         // Act: 실제 ViewModel 에 접근해 직접 호출
         scenario.onActivity { activity ->
             val viewModel = activity.viewModel
@@ -64,9 +62,8 @@ class ArtMovementActivityTest {
             // 실제 UI에서 클릭한 것처럼 ViewModel의 클릭 메서드 호출
             viewModel.onArtistProfileClicked(profile)
 
-            // Assert: 선택된 프로필이 업데이트 됐는지 확인
-            assertEquals(viewModel.selectedProfile.value?.name, "박소영")
-            assertEquals(viewModel.selectedProfile.value?.imageResId, R.drawable.parksoyeong)
+            assertEquals("박소영", viewModel.selectedProfile.value?.name)
+            assertEquals(R.drawable.parksoyeong, viewModel.selectedProfile.value?.imageResId)
         }
     }
 }
