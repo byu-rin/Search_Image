@@ -3,12 +3,15 @@ coreKtx = "1.16.0"
 appcompat = "1.7.1"
 material = "1.12.0"
 constraintLayout = "2.2.1"
-navigation = "2.9.0"
+navigation = "2.9.1"
 junit = "4.13.2"
 androidxJunit = "1.2.1"
 espresso = "3.6.1"
 hilt = "2.56.2"
 ksp = "2.1.10-1.0.31"
+lifecycleRuntimeTesting = "2.9.1"
+coreTesting = "2.2.0"
+coroutines = "1.10.1"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -21,6 +24,11 @@ junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidxJunit" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso" }
 hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt"}
+androidx-arch-core-testing = { group = "androidx.arch.core", name = "core-testing", version.ref = "coreTesting" }
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
+
+
+lifecycle-runtime-testing = { group = "androidx.lifecycle", name = "lifecycle-runtime-testing", version.ref = "lifecycleRuntimeTesting"}
 
 [plugins]
  hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }

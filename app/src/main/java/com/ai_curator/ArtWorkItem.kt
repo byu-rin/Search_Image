@@ -5,9 +5,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ai_curator.databinding.ItemImageBinding
 import com.ai_curator.databinding.ItemRecyclerviewBinding
 
+// repository class
 interface ArtWorkItem
 
-data class ArtProfile(val imageResId: Int, val name: String?) : ArtWorkItem
+data class ArtistProfileState(
+    val isSearched: Boolean = false,
+    val artProfileItems: List<ArtProfile> = emptyList()
+)
+
+data class ArtProfile(
+    val imageResId: Int,
+    val name: String?
+) : ArtWorkItem
 
 data class ImageItem(val imageResId: Int) : ArtWorkItem
 

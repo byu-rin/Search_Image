@@ -20,7 +20,7 @@ class ArtDetailActivity : androidx.appcompat.app.AppCompatActivity() {
 
         // image slider 용 viewpager2
         val pagerItems = artworks.map { ImageItem(it.artImage.first()) }
-        val pagerAdapter = MultiTypeAdapter(pagerItems, ViewType.IMAGE_SLIDER)
+        val pagerAdapter = MultiTypeAdapter(pagerItems, ViewType.IMAGE_SLIDER, onClick = {})
         binding.imagePager.adapter = pagerAdapter
 
         // 가로형 스크롤 otherartworks

@@ -1,5 +1,6 @@
 package com.ai_curator.data
 
+// data source class
 data class Artwork(
     val id: String,
     val title: String,
