@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-// 데이터 준비 및 상태관리 담당
+// 데이터 준비, 상태관리, 비즈니스 로직
 class ArtMovementViewModel @Inject constructor() : ViewModel() {
 
     // 검색 여부
