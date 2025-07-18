@@ -1,8 +1,5 @@
 package com.ai_curator
 
-import com.ai_curator.databinding.ItemImageBinding
-import com.ai_curator.databinding.ItemRecyclerviewBinding
-
 // repository class
 // artist image 와 name 만 movement activity recycler 에 뿌리기
 // 프로필 클릭 시 작가 아이디와 작품 아이디 대조 후 detailActivity 로 data intent
@@ -26,24 +23,3 @@ data class ArtistProfile(
     val artistImageRes: Int = 0,
     val artistName: String = ""
 ) : Art
-
-enum class ViewType {
-    ART_PROFILE, IMAGE_SLIDER
-}
-
-//// Category ArtistProfile ViewHolder
-//class ArtProfileViewHolder(
-//    private val binding: ItemRecyclerviewBinding
-//) {
-//    fun bind(item: ArtistProfile) {
-//        binding.ivImage.setImageResource(item.artistImageRes)
-//        binding.tvName.text = item.artistName
-//    }
-//}
-//
-//// Detail ImageSlider ArtImage ViewHolder
-//class ImageSliderViewHolder(private val binding: ItemImageBinding) {
-//    fun bind(item: Artwork) {
-//        binding.imageView.setImageResource(item.artImageRes)
-//    }
-//}

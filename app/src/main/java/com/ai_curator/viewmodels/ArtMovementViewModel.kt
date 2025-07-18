@@ -1,6 +1,5 @@
 package com.ai_curator.viewmodels
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ai_curator.ArtistProfile
@@ -13,53 +12,24 @@ import javax.inject.Inject
 
 // 데이터 준비, 상태관리, 비즈니스 로직
 class ArtMovementViewModel @Inject constructor() : ViewModel() {
-
-    // 초기화
-    // ViewModel 내 상태를 리스트로 보관해야 전체를 다룰 수 있음
+    // 작가 프로필 UI 상태 - 빈 리스트로 초기화
+    // View에서 작가 목록을 관찰하고, 변경 시 UI 자동 업데이트
     private val _artistProfileUiState = MutableStateFlow<List<ArtistProfile>>(emptyList())
-
-    // 작가 프로필 관리
-//    private val _artistProfileUiState = MutableStateFlow(ArtistProfile()) // 수정도 가능. 객체 생성하고 초기값 바로 넣기, 절대 null 불허
     val artistProfileUiState: StateFlow<List<ArtistProfile>> = _artistProfileUiState.asStateFlow() // 읽기 전용
 
-    // onCreate 시 호출
+    // onCreate 또는 필요 시점에 호출. 작가 리스트 로드.
+    // 내부적으로 상태 업데이트. 리턴값으로 artists 리스트 즉시 전달
     fun loadArtistProfile() : List<ArtistProfile> {
         viewModelScope.launch {
+            // Repository 로부터 작가 데이터 가져와 StateFlow 업데이트 (비동기 처리)
             _artistProfileUiState.value = ArtistRepository.artists
         }
+        // 실제 UI 에 표시할 데이터 반환 (launch 블록과 별개로 즉시 실행)
         return ArtistRepository.artists
     }
 
-    // 작가 프로필 클릭
+    // 작가 프로필 클릭 시 선택된 프로필을 저장하는 상태
+    // null 로 초기화되어 있으며, 선택된 경우 Detail 화면으로 전달.
     private val _selectedProfile = MutableStateFlow<ArtistProfile?> (null)
     val selectedProfile: StateFlow<ArtistProfile?> = _selectedProfile.asStateFlow()
-
-    // 검색 했으면 t, f
-//    fun fetchArtistProfile() {
-//        viewModelScope.launch {
-//            val profileItem = ArtworkRepository.artworks.flatMap { artwork ->
-//                artwork.artistImage.map { imageResId ->
-//                    ArtistProfile(artwork.id, imageResId, artwork.artist)
-//                }
-//            }
-//
-//            // 상태 업데이트 : 검색이 되었고 데이터가 존재함
-//            _artMovementUiState.value = _artMovementUiState.value.copy(
-//                isSearched = true,
-//                artProfileItems = profileItem
-//            )
-//        }
-//    }
-
-    // 카드 클릭 시 해당 카드에 맞는 정보가 디테일페이지에 렌더링
-    fun onArtistProfileClicked(artistProfile: ArtistProfile) {
-        val profile = artistProfile
-        _selectedProfile.value = profile
-
-        // artistId 로그 찍기
-        Log.d("ClickedArtist", "선택된 작가 ID: $_selectedProfile.value?.artistId")
-    }
-
-    // 작가 카드 클릭하면 디테일로 이동, 아니면 변화 없음
-    // TODO: qr 클릭 시 카메라 실행
 }

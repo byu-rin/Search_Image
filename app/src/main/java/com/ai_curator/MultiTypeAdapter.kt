@@ -46,7 +46,7 @@ class ArtistAdapter(
 ) : RecyclerView.Adapter<ArtistAdapter.ArtistViewHolder>() {
 
     inner class ArtistViewHolder(
-        val binding: ItemRecyclerviewBinding
+        binding: ItemRecyclerviewBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         val artistImage = binding.ivImage
         val artistName = binding.tvName
