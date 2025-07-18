@@ -1,11 +1,58 @@
 package com.ai_curator.data
 
+import com.ai_curator.ArtistProfile
+import com.ai_curator.Artwork
 import com.ai_curator.R
+
+object ArtistRepository {
+    val artists: List<ArtistProfile> = listOf(
+        ArtistProfile(
+            artistId = "1",
+            artistImageRes = R.drawable.parksoyeong,
+            artistName = "박소영"
+        ),
+        ArtistProfile(
+            artistId = "2",
+            artistImageRes = R.drawable.leeeunji,
+            artistName = "이은지"
+        ),
+        ArtistProfile(
+            artistId = "3",
+            artistImageRes = R.drawable.jinseona,
+            artistName = "진선아"
+        ),
+        ArtistProfile(
+            artistId = "4",
+            artistImageRes = R.drawable.jeongyukyung,
+            artistName = "정유경"
+        ),
+        ArtistProfile(
+            artistId = "5",
+            artistImageRes = R.drawable.jwahyunjin,
+            artistName = "소안 좌현진"
+        ),
+        ArtistProfile(
+            artistId = "6",
+            artistImageRes = R.drawable.kimjihee,
+            artistName = "솔벗 김지희"
+        ),
+        ArtistProfile(
+            artistId = "7",
+            artistImageRes = R.drawable.jinhyunghyun,
+            artistName = "진형현"
+        ),
+        ArtistProfile(
+            artistId = "8",
+            artistImageRes = R.drawable.choijihoon,
+            artistName = "최지훈"
+        )
+    )
+}
 
 object ArtworkRepository {
     val artworks: List<Artwork> = listOf(
         Artwork(
-            id = "1",
+           artworkId = "1",
             title = "심연",
             artist = "박소영",
             size = "90x80",
@@ -13,11 +60,10 @@ object ArtworkRepository {
             desc = """
                 이 작품은 수직으로 뻗은 고층 건물을 중심으로,\n 밤의 도시 풍경을 강렬하게 포착한다.\n 건물의 수많은 창문들은 노란빛으로 물들어 있어, 마치 각각의 삶이 작은 이야기처럼 그 안에서 살아 숨 쉬는 듯한 인상을 준다.\n\n작가는 어두운 배경 속에서 창문을 밝히는 따뜻한 조명들을 대비시켜,\n 도시의 외로움 속에서도 인간의 존재감과 온기를 시각적으로 표현했다.\n 비스듬히 세워진 간판은 시점의 왜곡을 강화하면서, 관람객이 마치 도시 한복판에 서 있는 듯한 몰입감을 준다.\n\n또한, 반복되는 창문의 패턴은 도시의 구조적 질서를 암시하면서도, 각기 다른 빛의 세기는 개별적 삶의 다양성을 반영한다.
             """.trimIndent(),
-            artImage = listOf(R.drawable.sim_yeon_parksoyeong),
-            artistImage = listOf(R.drawable.parksoyeong)
+            artImageRes = R.drawable.sim_yeon_parksoyeong
         ),
         Artwork(
-            id = "2",
+           artworkId = "2",
             title = "alice wake up",
             artist = "이은지",
             size = "162x130",
@@ -28,11 +74,10 @@ object ArtworkRepository {
             루이스 캐럴의 상상 세계를 차용한 듯 보이지만, 그 너머에는 자신만의 시적 언어가 있다. 
             이 작품은 꿈을 꾼다는 것이 단순한 도피가 아닌, 진실을 향한 또 다른 눈뜨기임을 속삭인다.
         """.trimIndent(),
-            artImage = listOf(R.drawable.alice_wake_up_leeeunji),
-            artistImage = listOf(R.drawable.leeeunji)
+            artImageRes = R.drawable.alice_wake_up_leeeunji
         ),
         Artwork(
-            id = "3",
+           artworkId = "3",
             title = "회귀",
             artist = "진선아",
             size = "130x162",
@@ -43,11 +88,10 @@ object ArtworkRepository {
             꽃잎의 결 하나하나는 시간의 흐름이자 감정의 잔상이며, 화면 전체는 탄생과 소멸이 맞닿는, 어떤 정적의 공간이 된다. 
             이것은 죽음의 장면이 아니라, 삶이 다시 꽃으로 돌아가는 회귀의 문턱이다.
         """.trimIndent(),
-            artImage = listOf(R.drawable.hyi_gi_jinseona),
-            artistImage = listOf(R.drawable.jinseona)
+            artImageRes = R.drawable.hyi_gi_jinseona
         ),
         Artwork(
-            id = "4",
+           artworkId = "4",
             title = "비극적 아이러니",
             artist = "정유경",
             size = "162x130",
@@ -57,58 +101,52 @@ object ArtworkRepository {
             고요하고 묵직한 수묵 위로 덧입혀진 색은, 무거움 속에서 피어나는 아름다움의 아이러니를 말한다.
             위기의 순간, 예기치 않게 찾아오는 찰나의 빛. 이것이 우리가 기억해야 할 도시의 또 다른 진실이다.
         """.trimIndent(),
-            artImage = listOf(R.drawable.sad_irony_jeongyukyung),
-            artistImage = listOf(R.drawable.jeongyukyung)
+            artImageRes = R.drawable.sad_irony_jeongyukyung
         ),
         Artwork(
-            id = "5",
+           artworkId = "5",
             title = "서경덕(徐敬德)의 《산거 山居》",
             artist = "소안 좌현진",
             size = "40x205",
             ingredient = "화선지에 먹",
             desc = "산속에서의 은거 생활을 담담하고도 철학적으로 노래한 시다. 전서체로 작품했다.",
-            artImage = listOf(R.drawable.san_geo_jwahyunjin),
-            artistImage = listOf(R.drawable.jwahyunjin)
+            artImageRes = R.drawable.san_geo_jwahyunjin
         ),
         Artwork(
-            id = "6",
+           artworkId = "6",
             title = "서기 이씨의 편지",
             artist = "솔벗 김지희",
             size = "97x60",
             ingredient = "화선지에 먹",
             desc = "이씨 부인이 쓴 편지를 민체로 작품했다.",
-            artImage = listOf(R.drawable.lee_letter_kimjihee),
-            artistImage = listOf(R.drawable.kimjihee)
+            artImageRes = R.drawable.lee_letter_kimjihee
         ),
         Artwork(
-            id = "7",
+           artworkId = "7",
             title = "정도전(鄭道傳)의 《영설차준촌시운 詠雪次遁村詩韻》",
             artist = "자강 진형현",
             size = "70x205",
             ingredient = "화선지에 먹",
             desc = "조선 개국공신 정도전의 고사 인용 시로, 눈을 예찬하거나 자연의 기상 속 철학적 사유를 담은 시다. 해서체로 작품했다.",
-            artImage = listOf(R.drawable.yeongsul_jinhyunghyun),
-            artistImage = listOf(R.drawable.jinhyunghyun)
+            artImageRes = R.drawable.yeongsul_jinhyunghyun
         ),
         Artwork(
-            id = "8",
+           artworkId = "8",
             title = "이백(李白)의 《춘일취기언지 春日醉起言志》",
             artist = "청하 최지훈",
             size = "70x205",
             ingredient = "화선지에 먹",
             desc = "봄날 술에 취해 뜻을 말하다. 이백 특유의 낭만적 기개와 자유로운 정신이 담긴 시다. 행서체로 작품했다.",
-            artImage = listOf(R.drawable.chunil_choijihoon),
-            artistImage = listOf(R.drawable.choijihoon)
+            artImageRes = R.drawable.chunil_choijihoon
         ),
         Artwork(
-            id = "9",
+           artworkId = "9",
             title = "허균(許筠)의 《행산 杏山》",
             artist = "청하 최지훈",
             size = "70x205",
             ingredient = "화선지에 먹",
             desc = "홍길동전을 지은 허균의 시다. 자연과 은둔의 의미를 담고 있다. 예서체로 작품했다.",
-            artImage = listOf(R.drawable.hengsan_choijihoon),
-            artistImage = listOf(R.drawable.choijihoon)
+            artImageRes = R.drawable.hengsan_choijihoon
         )
     )
 }

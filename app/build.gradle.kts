@@ -49,6 +49,8 @@ dependencies {
     implementation(libs.navigation.fragment.ktx)
     implementation(libs.navigation.ui.ktx)
     implementation(libs.hilt)
+    // implementation(libs.androidx.room.compiler)
+    // implementation(libs.androidx.room.ktx)
 
     testImplementation(libs.junit)
     testImplementation(libs.kotlinx.coroutines.test)

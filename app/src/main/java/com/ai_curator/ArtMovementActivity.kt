@@ -2,6 +2,7 @@ package com.ai_curator
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -17,16 +18,20 @@ class ArtMovementActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        // 작가 프로필 카드 초기화
-        viewModel.fetchArtistProfile()
+        val artistItemList = ArrayList<ArtistProfile>()
+        artistItemList.add(ArtistProfile("1", R.drawable.parksoyeong, "박소영"))
+        artistItemList.add(ArtistProfile("2", R.drawable.leeeunji, "이은지"))
 
-        val adapter = MultiTypeAdapter(
-            itemList = emptyList(),
-            viewType = ViewType.ART_PROFILE,
-            onClick = { item -> viewModel.onArtistProfileClicked(item)}
-        )
-        binding.movementGrid.adapter = adapter
+//        val adapter = ArtistAdapter(
+//            artistItemList = emptyList(),
+//            onItemClick = { artistImageRes ->
+//                viewModel.onArtistProfileClicked(artistProfile = artistImageRes)
+//            }
+//        )
+
+        binding.movementGrid.adapter = ArtistAdapter(artistItemList)
         binding.movementGrid.layoutManager = GridLayoutManager(this, 2)
+
         binding.movementGrid.addItemDecoration(
             GridSpacingItemDecoration(
                 spanCount = 2,
@@ -35,12 +40,18 @@ class ArtMovementActivity : AppCompatActivity() {
             )
         )
 
+        // 작가 프로필 카드 초기화
+        viewModel.loadArtistProfile()
+        Log.d("ArtMovementActivity", "onCreate: ${viewModel. loadArtistProfile()}")
+
+
+
         // UiState 를 관찰해서 RecyclerView 갱신 필요
-        lifecycleScope.launchWhenCreated {
-            viewModel.artMovementUiState.collect { state ->
-                adapter.updateItems(state.artProfileItems)
-            }
-        }
+//        lifecycleScope.launchWhenCreated {
+//            viewModel.artistProfileUiState.collect { state ->
+//                adapter.updateItems(state.artProfileItems)
+//            }
+//        }
 
         // 프로필 클릭 시 Detail 페이지로 이동
         lifecycleScope.launchWhenCreated {
@@ -49,8 +60,8 @@ class ArtMovementActivity : AppCompatActivity() {
                     // DetailActivity 이동
                     val intent =
                         Intent(this@ArtMovementActivity, ArtDetailActivity::class.java).apply {
-                            putExtra("profile", it.imageResId)
-                            putExtra("artistName", it.name)
+                            putExtra("profile", it.artistImageRes)
+                            putExtra("artistName", it.artistName)
                         }
                     startActivity(intent)
                 }

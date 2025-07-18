@@ -7,52 +7,70 @@ import com.ai_curator.databinding.ItemImageBinding
 import com.ai_curator.databinding.ItemRecyclerviewBinding
 
 // 클릭 전달만 담당. 실제 동작은 Viewmodel -> Activity
-class MultiTypeAdapter(
-    private var itemList: List<ArtWorkItem>,
-    private val viewType: ViewType,
-    private val onClick: (ArtWorkItem) -> Unit
-) : RecyclerView.Adapter<ArtWorkItemView>() {
+class ArtworkAdapter(
+    private var artWorkItemList: List<Artwork>
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    fun updateItems(newItems: List<ArtWorkItem>) {
-        itemList = newItems // 외부에서 변경 x
-        notifyDataSetChanged()
-    }
+//    fun updateItems(newItems: List<ArtWorkItem>) {
+//        itemList = newItems // 외부에서 변경 x
+//        notifyDataSetChanged()
+//    }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArtWorkItemView {
-        return when (viewType) {
-            ViewType.ART_PROFILE.ordinal -> {
-                val binding = ItemRecyclerviewBinding.inflate(
-                    LayoutInflater.from(parent.context),
-                    parent,
-                    false
-                )
-                ArtProfileViewHolder(binding)
-            }
-            ViewType.IMAGE_SLIDER.ordinal -> {
-                val binding =
-                    ItemImageBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-                ImageSliderViewHolder(binding)
-            }
-            else -> throw IllegalArgumentException("Invalid view type")
+    inner class ArtWorkViewHolder(
+        val binding: ItemImageBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(item: Artwork) {
+            binding.imageView.setImageResource(item.artImageRes)
         }
     }
 
-    override fun onBindViewHolder(holder: ArtWorkItemView, position: Int) {
-        holder.bind(itemList[position])
-        holder.itemView.setOnClickListener {
-            onClick(itemList[position])
-        }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
+        ArtWorkViewHolder(
+            ItemImageBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        (holder as ArtWorkViewHolder).bind(artWorkItemList[position])
     }
 
-    override fun getItemViewType(position: Int): Int {
-        return when (viewType) {
-            ViewType.ART_PROFILE -> ViewType.ART_PROFILE.ordinal
-            ViewType.IMAGE_SLIDER -> ViewType.IMAGE_SLIDER.ordinal
-        }
-    }
-
-    override fun getItemCount() = itemList.size
+    override fun getItemCount() = artWorkItemList.size
 }
+
+class ArtistAdapter(
+    private var artistItemList: List<ArtistProfile>,
+    // private val onItemClick: (ArtistProfile) -> Unit // 클릭 시 artistId 전달
+) : RecyclerView.Adapter<ArtistAdapter.ArtistViewHolder>() {
+
+    inner class ArtistViewHolder(
+        val binding: ItemRecyclerviewBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
+        val artistImage = binding.ivImage
+        val artistName = binding.tvName
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArtistViewHolder {
+        val binding = ItemRecyclerviewBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
+        return ArtistViewHolder(binding)
+    }
+
+    override fun onBindViewHolder(holder: ArtistViewHolder, position: Int) {
+        holder.artistImage.setImageResource(artistItemList[position].artistImageRes)
+        holder.artistName.text = artistItemList[position].artistName
+    }
+
+    override fun getItemCount(): Int {
+        return artistItemList.size
+    }
+}
+
 
 // TODO: 작가페이지 -> 작가 클릭하면 디테일로 이동. 필터 버튼 대신 qr 버튼, 중복 작가는 한명만. 검색기능 추가(검색하면 연검뜨게 하고 버튼 클릭하면 해당 카드뷰만 나오게)
 // TODO: 디테일페이지 -> 디테일페이지에 읽어주기 기능 추가

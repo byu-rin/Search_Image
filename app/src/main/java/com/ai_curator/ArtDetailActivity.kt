@@ -3,25 +3,28 @@ package com.ai_curator
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.LinearLayout
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.viewpager2.widget.ViewPager2
 import com.ai_curator.data.ArtworkRepository
 import com.ai_curator.databinding.ActivityArtDetailBinding
 
-class ArtDetailActivity : androidx.appcompat.app.AppCompatActivity() {
+class ArtDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityArtDetailBinding
+    private lateinit var viewPager: ViewPager2
+    private lateinit var pagerAdapter: ArtworkAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityArtDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val container = binding.otherArtworksLinearLayout
-        val artworks = ArtworkRepository.artworks.take(3)
+        viewPager = binding.imagePager
+        pagerAdapter = ArtworkAdapter(ArtworkRepository.artworks)
+        viewPager.adapter = pagerAdapter
 
-        // image slider 용 viewpager2
-        val pagerItems = artworks.map { ImageItem(it.artImage.first()) }
-        val pagerAdapter = MultiTypeAdapter(pagerItems, ViewType.IMAGE_SLIDER, onClick = {})
-        binding.imagePager.adapter = pagerAdapter
+        val container = binding.otherArtworksLinearLayout // 연관 작품
+        val artworks = ArtworkRepository.artworks.take(3) // 3개의 작품만 가져옴
 
         // 가로형 스크롤 otherartworks
         artworks.forEach { artwork ->
@@ -33,7 +36,7 @@ class ArtDetailActivity : androidx.appcompat.app.AppCompatActivity() {
                     setMargins(0, 0, 24, 0) // 오른쪽 여백
                 }
                 scaleType = ImageView.ScaleType.CENTER_CROP
-                setImageResource(artwork.artImage.first())
+                setImageResource(artwork.artImageRes)
                 contentDescription = "Artwork"
                 background = ContextCompat.getDrawable(context, R.drawable.cardview_all_round)
             }
