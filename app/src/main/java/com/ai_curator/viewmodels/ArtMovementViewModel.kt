@@ -32,4 +32,11 @@ class ArtMovementViewModel @Inject constructor() : ViewModel() {
     // null 로 초기화되어 있으며, 선택된 경우 Detail 화면으로 전달.
     private val _selectedProfile = MutableStateFlow<ArtistProfile?> (null)
     val selectedProfile: StateFlow<ArtistProfile?> = _selectedProfile.asStateFlow()
+
+    // 프로필 클릭 시 detail activity 로 이동
+    fun onClickArtistProfile() {
+        viewModelScope.launch {
+            _selectedProfile.value = ArtistRepository.artists[0]
+        }
+    }
 }
