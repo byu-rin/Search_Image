@@ -1,11 +1,12 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-parcelize")
 }
 
 android {
     namespace = "com.ai_curator"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.byurin"
@@ -49,6 +50,7 @@ dependencies {
     implementation(libs.navigation.fragment.ktx)
     implementation(libs.navigation.ui.ktx)
     implementation(libs.hilt)
+    implementation(libs.androidx.junit.ktx)
     // implementation(libs.androidx.room.compiler)
     // implementation(libs.androidx.room.ktx)
 
@@ -59,4 +61,5 @@ dependencies {
     androidTestImplementation(libs.lifecycle.runtime.testing)
     androidTestImplementation(libs.androidx.arch.core.testing)
     androidTestImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(kotlin("test"))
 }

@@ -7,15 +7,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ai_curator.databinding.ItemImageBinding
 import com.ai_curator.databinding.ItemRecyclerviewBinding
 
+interface ArtistProfileSetOnClickListener {
+    fun artistItemClickLister(itemData: ArtistProfile, binding: ItemRecyclerviewBinding)
+}
+
 // 클릭 전달만 담당. 실제 동작은 Viewmodel -> Activity
 class ArtworkAdapter(
-    private var artWorkItemList: List<Artwork>
+    private var artWorkItemList: List<Artwork>,
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
-//    fun updateItems(newItems: List<ArtWorkItem>) {
-//        itemList = newItems // 외부에서 변경 x
-//        notifyDataSetChanged()
-//    }
 
     inner class ArtWorkViewHolder(
         val binding: ItemImageBinding
@@ -45,8 +44,16 @@ class ArtistAdapter(
     private val artistItemList: List<ArtistProfile>,
 ) : RecyclerView.Adapter<ArtistAdapter.ArtistViewHolder>() {
 
+    // interface 객체 생성
+    private var onClickListener: ArtistProfileSetOnClickListener? = null
+
+    // activity 에서 호출 시 객체 초기화
+    fun onArtistProfileSetOnClickListener(listener: ArtistProfileSetOnClickListener) {
+        this.onClickListener = listener
+    }
+
     inner class ArtistViewHolder(
-        binding: ItemRecyclerviewBinding
+        private val binding: ItemRecyclerviewBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         val artistImage = binding.ivImage
         val artistName = binding.tvName
@@ -54,11 +61,14 @@ class ArtistAdapter(
         fun bind(item: ArtistProfile) {
             artistImage.setImageResource(item.artistImageRes)
             artistName.text = item.artistName
-            artistImage.setOnClickListener {
-                Intent(itemView.context, ArtDetailActivity::class.java).apply {
-//                    putExtra("artist", item)
-                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                }.run { itemView.context.startActivity(this)}
+
+            binding.tvName.text = item.artistName
+
+            // 클릭하고자 하는 view의 리스너에 데이터 던달
+            binding.root.setOnClickListener {
+                if (adapterPosition != RecyclerView.NO_POSITION) {
+                    onClickListener?.artistItemClickLister(item, binding)
+                }
             }
         }
     }

@@ -1,5 +1,8 @@
 package com.ai_curator
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
 // repository class
 // artist image 와 name 만 movement activity recycler 에 뿌리기
 // 프로필 클릭 시 작가 아이디와 작품 아이디 대조 후 detailActivity 로 data intent
@@ -8,6 +11,7 @@ package com.ai_curator
 interface Art
 
 // data source class
+@Parcelize
 data class Artwork(
     val artworkId: String,
     val artist: String,
@@ -15,11 +19,16 @@ data class Artwork(
     val size: String,
     val ingredient: String,
     val desc: String,
-    val artImageRes: Int, // drawable resource id
-) : Art
+    val artImageRes: Int // drawable resource id
+) : Parcelable, Art
 
+@Parcelize
 data class ArtistProfile(
     val artistId: String = "",
     val artistImageRes: Int = 0,
     val artistName: String = ""
-) : Art
+) : Parcelable, Art
+
+/* if (ArtistProfile.artistName == Artwork.artist) {
+callAll.Artwork
+*/
