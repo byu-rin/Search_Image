@@ -1,6 +1,5 @@
 package com.ai_curator
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -13,8 +12,8 @@ interface ArtistProfileSetOnClickListener {
 
 // 클릭 전달만 담당. 실제 동작은 Viewmodel -> Activity
 class ArtworkAdapter(
-    private var artWorkItemList: List<Artwork>,
-) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    private var artWorkItemList: List<Artwork>
+) : RecyclerView.Adapter<ArtworkAdapter.ArtWorkViewHolder>() {
 
     inner class ArtWorkViewHolder(
         val binding: ItemImageBinding
@@ -24,20 +23,25 @@ class ArtworkAdapter(
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
-        ArtWorkViewHolder(
-            ItemImageBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArtWorkViewHolder {
+        val binding = ItemImageBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
         )
+        return ArtWorkViewHolder(binding)
+    }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as ArtWorkViewHolder).bind(artWorkItemList[position])
+    override fun onBindViewHolder(holder: ArtWorkViewHolder, position: Int) {
+        holder.bind(artWorkItemList[position])
     }
 
     override fun getItemCount() = artWorkItemList.size
+
+    fun setArtworks(newArtworks: List<Artwork>) {
+        this.artWorkItemList = newArtworks
+        notifyDataSetChanged()
+    }
 }
 
 class ArtistAdapter(
@@ -52,6 +56,7 @@ class ArtistAdapter(
         this.onClickListener = listener
     }
 
+    // viewholder 클래스 정의 - 하나의 item 레이아웃을 담당
     inner class ArtistViewHolder(
         private val binding: ItemRecyclerviewBinding
     ) : RecyclerView.ViewHolder(binding.root) {
@@ -84,8 +89,6 @@ class ArtistAdapter(
 
     override fun onBindViewHolder(holder: ArtistViewHolder, position: Int) {
         holder.bind(artistItemList[position])
-//        holder.artistImage.setImageResource(artistItemList[position].artistImageRes)
-//        holder.artistName.text = artistItemList[position].artistName
     }
 
     override fun getItemCount(): Int {

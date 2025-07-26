@@ -27,16 +27,4 @@ class ArtMovementViewModel @Inject constructor() : ViewModel() {
         // 실제 UI 에 표시할 데이터 반환 (launch 블록과 별개로 즉시 실행)
         return ArtistRepository.artists
     }
-
-    // 작가 프로필 클릭 시 선택된 프로필을 저장하는 상태
-    // null 로 초기화되어 있으며, 선택된 경우 Detail 화면으로 전달.
-    private val _selectedProfile = MutableStateFlow<ArtistProfile?> (null)
-    val selectedProfile: StateFlow<ArtistProfile?> = _selectedProfile.asStateFlow()
-
-    // 프로필 클릭 시 detail activity 로 이동
-    fun onClickArtistProfile() {
-        viewModelScope.launch {
-            _selectedProfile.value = ArtistRepository.artists[0]
-        }
-    }
 }

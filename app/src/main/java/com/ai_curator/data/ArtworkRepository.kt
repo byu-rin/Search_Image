@@ -39,12 +39,12 @@ object ArtistRepository {
         ArtistProfile(
             artistId = "7",
             artistImageRes = R.drawable.jinhyunghyun,
-            artistName = "진형현"
+            artistName = "자강 진형현"
         ),
         ArtistProfile(
             artistId = "8",
             artistImageRes = R.drawable.choijihoon,
-            artistName = "최지훈"
+            artistName = "청하 최지훈"
         )
     )
 }
@@ -139,14 +139,14 @@ object ArtworkRepository {
             desc = "봄날 술에 취해 뜻을 말하다. 이백 특유의 낭만적 기개와 자유로운 정신이 담긴 시다. 행서체로 작품했다.",
             artImageRes = R.drawable.chunil_choijihoon
         ),
-        Artwork(
-           artworkId = "9",
-            title = "허균(許筠)의 《행산 杏山》",
-            artist = "청하 최지훈",
-            size = "70x205",
-            ingredient = "화선지에 먹",
-            desc = "홍길동전을 지은 허균의 시다. 자연과 은둔의 의미를 담고 있다. 예서체로 작품했다.",
-            artImageRes = R.drawable.hengsan_choijihoon
-        )
+//        Artwork(
+//           artworkId = "9",
+//            title = "허균(許筠)의 《행산 杏山》",
+//            artist = "청하 최지훈",
+//            size = "70x205",
+//            ingredient = "화선지에 먹",
+//            desc = "홍길동전을 지은 허균의 시다. 자연과 은둔의 의미를 담고 있다. 예서체로 작품했다.",
+//            artImageRes = R.drawable.hengsan_choijihoon
+//        )
     )
 }

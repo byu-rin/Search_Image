@@ -1,6 +1,5 @@
 package com.ai_curator
 
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
@@ -10,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.ai_curator.data.ArtworkRepository
+import com.ai_curator.data.ArtworkRepository.artworks
 import com.ai_curator.databinding.ActivityArtDetailBinding
 import com.ai_curator.viewmodels.ArtDetailViewModel
 
@@ -37,8 +37,12 @@ class ArtDetailActivity : AppCompatActivity() {
         // viewmodel 통해 데이터 로드
         viewModel.loadArtworksByArtistName(artistName)
 
+        pagerAdapter = ArtworkAdapter(emptyList())
+        binding.imagePager.adapter = pagerAdapter
+
         // observe
         viewModel.artworksByArtist.observe(this) { artworks ->
+            pagerAdapter.setArtworks(artworks) // 데이터만 바꿔주기
             if (artworks.isEmpty()) {
                 binding.artist.text = "$artistName 작가의 작품이 없습니다"
             } else {
@@ -49,34 +53,17 @@ class ArtDetailActivity : AppCompatActivity() {
                 binding.title.text = artwork.title
                 binding.artist.text = artwork.artist
                 binding.description.text = artwork.desc
-//                binding.image.setImageResource(artwork.artImageRes)
+                //binding.imagePager.setImageResource(artwork.artImageRes)
+
+//                viewPager = binding.imagePager
+//                pagerAdapter = ArtworkAdapter(ArtworkRepository.artworks)
+//                viewPager.adapter = pagerAdapter
             }
+            Log.d("ArtDetail", "Filtered artworks: ${artworks.size}")
         }
-
-//        val data: ArtistProfile? = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-//            intent.getParcelableExtra("data", data::class.java)
-//        } else {
-//            @Suppress("DEPRECATION")
-//            intent.getParcelableExtra("data") as? ArtistProfile
-//        }
-//
-//        data?.let {
-//            binding.artist.text = it.artistName
-//            Log.d("IntentDebug", "받은 artistName: $it")
-//        } ?: Log.w("IntentDebug", "ArtDetailActivity ← ArtistProfile 전달되지 않음")
-//        finish()
-
-        viewPager = binding.imagePager
-        pagerAdapter = ArtworkAdapter(ArtworkRepository.artworks)
-        viewPager.adapter = pagerAdapter
 
         val container = binding.otherArtworksLinearLayout // 연관 작품
         val artworks = ArtworkRepository.artworks.take(3) // 3개의 작품만 가져옴
-
-        // 1. intent 로 받은 artworkId
-        val artworkId = intent.getStringExtra("artworkId")
-        // 2. ArtworkRepository 에서 해당 id 를 가진 작품 찾기
-        val artwork = ArtworkRepository.artworks.find { it.artworkId == artworkId }
 
         // 가로형 스크롤 otherartworks
         artworks.forEach { artwork ->
