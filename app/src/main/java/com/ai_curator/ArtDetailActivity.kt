@@ -7,16 +7,13 @@ import android.widget.LinearLayout
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.viewpager2.widget.ViewPager2
 import com.ai_curator.data.ArtworkRepository
-import com.ai_curator.data.ArtworkRepository.artworks
 import com.ai_curator.databinding.ActivityArtDetailBinding
 import com.ai_curator.viewmodels.ArtDetailViewModel
 
 class ArtDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityArtDetailBinding
     private val viewModel: ArtDetailViewModel by viewModels()
-    private lateinit var viewPager: ViewPager2
     private lateinit var pagerAdapter: ArtworkAdapter
     private lateinit var data : ArtistProfile
 

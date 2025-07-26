@@ -38,9 +38,12 @@ class ArtworkAdapter(
 
     override fun getItemCount() = artWorkItemList.size
 
+    init {
+        setHasStableIds(true)
+    }
+
     fun setArtworks(newArtworks: List<Artwork>) {
         this.artWorkItemList = newArtworks
-        notifyDataSetChanged()
     }
 }
 
