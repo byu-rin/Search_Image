@@ -3,9 +3,18 @@ package com.ai_curator.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.ai_curator.Artwork
 import com.ai_curator.data.ArtworkRepository
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
+
+sealed class UiEvent {
+    object ExpandText : UiEvent()
+}
 
 class ArtDetailViewModel @Inject constructor() : ViewModel() {
     private val allArtworks = ArtworkRepository.artworks
@@ -16,5 +25,18 @@ class ArtDetailViewModel @Inject constructor() : ViewModel() {
     fun loadArtworksByArtistName(artistName: String) {
         val filtered = allArtworks.filter { it.artist == artistName }
         _artworksByArtist.value = filtered
+    }
+
+    private val _eventChannel = Channel<UiEvent>(Channel.BUFFERED)
+    val eventFlow = _eventChannel.receiveAsFlow()
+
+    val isExpanded = MutableStateFlow(false)
+    fun onShowViewClicked() {
+        viewModelScope.launch {
+            if (!isExpanded.value) {
+                _eventChannel.send(UiEvent.ExpandText)
+                isExpanded.value = true
+            }
+        }
     }
 }

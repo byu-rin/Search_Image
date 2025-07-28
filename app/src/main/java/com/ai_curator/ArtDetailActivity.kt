@@ -2,14 +2,17 @@ package com.ai_curator
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
 import com.ai_curator.data.ArtworkRepository
 import com.ai_curator.databinding.ActivityArtDetailBinding
 import com.ai_curator.viewmodels.ArtDetailViewModel
+import com.ai_curator.viewmodels.UiEvent
 
 class ArtDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityArtDetailBinding
@@ -50,17 +53,28 @@ class ArtDetailActivity : AppCompatActivity() {
                 binding.title.text = artwork.title
                 binding.artist.text = artwork.artist
                 binding.description.text = artwork.desc
-                //binding.imagePager.setImageResource(artwork.artImageRes)
-
-//                viewPager = binding.imagePager
-//                pagerAdapter = ArtworkAdapter(ArtworkRepository.artworks)
-//                viewPager.adapter = pagerAdapter
             }
             Log.d("ArtDetail", "Filtered artworks: ${artworks.size}")
-        }
 
+
+        }
         val container = binding.otherArtworksLinearLayout // 연관 작품
         val artworks = ArtworkRepository.artworks.take(3) // 3개의 작품만 가져옴
+
+        binding.showMore.setOnClickListener {
+            viewModel.onShowViewClicked()
+        }
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.eventFlow.collect { event ->
+                when (event) {
+                    is UiEvent.ExpandText -> {
+                        binding.description.maxLines = Int.MAX_VALUE
+                        binding.showMore.visibility = View.GONE
+                    }
+                }
+            }
+        }
 
         // 가로형 스크롤 otherartworks
         artworks.forEach { artwork ->

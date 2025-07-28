@@ -23,6 +23,18 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/main_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="16dp"
+                android:text="Vigos"
+                android:textColor="@color/ai_curator_cream"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:layout_gravity="center"/>
+
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/imagePager"
                 android:layout_width="match_parent"
@@ -70,10 +82,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:ellipsize="end"
-                    android:maxLines="4"
+                    android:maxLines="2"
                     android:text="The Renaissance was a pivotal movement in European history, spanning from the 14th to the 17th century..."
                     android:textColor="@color/ai_curator_cream"
-                    android:textSize="14sp" />
+                    android:textSize="18sp" />
 
                 <!-- Show more -->
                 <TextView
@@ -81,7 +93,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
+                    android:clickable="true"
                     android:text="Show more"
+                    android:textSize="18sp"
                     android:textColor="@color/ai_curator_orange"
                     android:textStyle="bold" />
 
