@@ -97,7 +97,7 @@ class ArtMovementActivity : AppCompatActivity() {
                 viewModel.onSearchQueryChanged(query)
 
                 // 키보드 내리기
-                val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
                 imm.hideSoftInputFromWindow(binding.searchEditText.windowToken, 0)
 
                 true  // 이벤트 소비

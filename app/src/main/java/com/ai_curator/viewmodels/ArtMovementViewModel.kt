@@ -8,12 +8,10 @@ import androidx.lifecycle.viewModelScope
 import com.ai_curator.ArtistProfile
 import com.ai_curator.data.ArtistRepository
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+
 sealed class MovementPageUiEvent {
     data class NavigateToDetail(val artistProfile: ArtistProfile) : MovementPageUiEvent()
     object ExpandText : MovementPageUiEvent()
