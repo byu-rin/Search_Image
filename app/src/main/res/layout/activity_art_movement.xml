@@ -43,6 +43,7 @@
             android:background="@drawable/searchbar_all_round"
             android:drawableEnd="@drawable/ic_search"
             android:hint="Search"
+            android:imeOptions="actionSearch"
             android:inputType="text"
             android:padding="12dp"
             android:textColor="@color/ai_curator_cream"

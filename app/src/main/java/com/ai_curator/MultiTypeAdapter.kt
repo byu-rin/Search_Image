@@ -53,6 +53,7 @@ class ArtistAdapter(
 
     // interface 객체 생성
     private var onClickListener: ArtistProfileSetOnClickListener? = null
+    private var artistList: List<ArtistProfile> = emptyList()
 
     // activity 에서 호출 시 객체 초기화
     fun onArtistProfileSetOnClickListener(listener: ArtistProfileSetOnClickListener) {
@@ -96,6 +97,11 @@ class ArtistAdapter(
 
     override fun getItemCount(): Int {
         return artistItemList.size
+    }
+
+    fun submitList(newList: List<ArtistProfile>) {
+        this.artistList = newList
+        notifyDataSetChanged()
     }
 }
 

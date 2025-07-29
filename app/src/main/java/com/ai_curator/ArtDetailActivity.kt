@@ -12,7 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import com.ai_curator.data.ArtworkRepository
 import com.ai_curator.databinding.ActivityArtDetailBinding
 import com.ai_curator.viewmodels.ArtDetailViewModel
-import com.ai_curator.viewmodels.UiEvent
+import com.ai_curator.viewmodels.DetailPageUiEvent
 
 class ArtDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityArtDetailBinding
@@ -68,7 +68,7 @@ class ArtDetailActivity : AppCompatActivity() {
         lifecycleScope.launchWhenStarted {
             viewModel.eventFlow.collect { event ->
                 when (event) {
-                    is UiEvent.ExpandText -> {
+                    is DetailPageUiEvent.ExpandText -> {
                         binding.description.maxLines = Int.MAX_VALUE
                         binding.showMore.visibility = View.GONE
                     }

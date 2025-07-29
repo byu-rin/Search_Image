@@ -12,8 +12,8 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-sealed class UiEvent {
-    object ExpandText : UiEvent()
+sealed class DetailPageUiEvent {
+    object ExpandText : DetailPageUiEvent()
 }
 
 class ArtDetailViewModel @Inject constructor() : ViewModel() {
@@ -27,14 +27,14 @@ class ArtDetailViewModel @Inject constructor() : ViewModel() {
         _artworksByArtist.value = filtered
     }
 
-    private val _eventChannel = Channel<UiEvent>(Channel.BUFFERED)
+    private val _eventChannel = Channel<DetailPageUiEvent>(Channel.BUFFERED)
     val eventFlow = _eventChannel.receiveAsFlow()
 
     val isExpanded = MutableStateFlow(false)
     fun onShowViewClicked() {
         viewModelScope.launch {
             if (!isExpanded.value) {
-                _eventChannel.send(UiEvent.ExpandText)
+                _eventChannel.send(DetailPageUiEvent.ExpandText)
                 isExpanded.value = true
             }
         }
