@@ -1,12 +1,13 @@
 package com.ai_curator
 
-import android.content.Context
+import android.R.attr.visibility
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.KeyEvent
+import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.viewModels
@@ -21,6 +22,7 @@ import com.ai_curator.viewmodels.MovementPageUiEvent
 
 class ArtMovementActivity : AppCompatActivity() {
     private lateinit var artistAdapter: ArtistAdapter
+    private lateinit var artistItemList: List<Any>
     private val binding by lazy { ActivityArtMovementBinding.inflate(layoutInflater) }
     val viewModel: ArtMovementViewModel by viewModels()
 
@@ -28,14 +30,12 @@ class ArtMovementActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        // item 초기화
-        val artistItemList = ArrayList<ArtistProfile>()
-        // 기존 데이터 지우고 새로 추가하고 싶으면
-        // artistItemList.clear()
+        // item, adapter 초기화
+        var artistItemList =
+            ArrayList<ArtistProfile>() // 기존 데이터 지우고 새로 추가하고 싶으면 artistItemList.clear() 추가
         artistItemList.addAll(ArtistRepository.artists)
-
-        // adapter 초기화
         artistAdapter = ArtistAdapter(artistItemList)
+
         binding.movementGrid.adapter = artistAdapter
         binding.movementGrid.layoutManager = GridLayoutManager(this, 2)
         binding.movementGrid.addItemDecoration(
@@ -46,9 +46,7 @@ class ArtMovementActivity : AppCompatActivity() {
             )
         )
 
-        // 작가 프로필 카드 초기화
-        viewModel.loadArtistProfile()
-        Log.d("ArtMovementActivity", "onCreate: ${viewModel.loadArtistProfile()}")
+        binding.movementGrid.adapter = artistAdapter
 
         // ArtistAdapter 클릭 시 ViewModel 에 전달
         // 누가 클릭 이벤트를 책임지는가? 의 책임이 Adapter -> ViewModel 로 분리된 구조
@@ -70,9 +68,6 @@ class ArtMovementActivity : AppCompatActivity() {
                                 }
                                 startActivity(intent)
                             }
-
-                            is MovementPageUiEvent.ExpandText -> {
-                            }
                         }
                     }
                 }
@@ -81,52 +76,57 @@ class ArtMovementActivity : AppCompatActivity() {
 
         // 검색 기능 연결
         binding.searchEditText.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            override fun afterTextChanged(s: Editable?) {
+                Log.d("SearchDebug", "Search text changed: ${s.toString()}")
                 viewModel.onSearchQueryChanged(s.toString())
             }
 
-            override fun afterTextChanged(s: Editable?) {}
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })
 
         binding.searchEditText.setOnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH ||
-                (event?.keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN)) {
+                (event?.keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN)
+            ) {
 
                 val query = binding.searchEditText.text.toString()
+                Log.d("SearchDebug", "Enter key pressed: $query")
                 viewModel.onSearchQueryChanged(query)
 
                 // 키보드 내리기
                 val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
                 imm.hideSoftInputFromWindow(binding.searchEditText.windowToken, 0)
-
                 true  // 이벤트 소비
-            } else {
-                false
-            }
+            } else false
         }
 
         // viewModel data observing
         viewModel.artistProfileUiState.observe(this) { artistList ->
-            artistAdapter.submitList(artistList)
-            Log.d("ArtMovementActivity", "Filtered artist list size: ${artistList.size}")
-        }
-
-        // event flow 처리 (한 번만 collect)
-        lifecycleScope.launchWhenStarted {
-            viewModel.eventFlow.collect { event ->
-                when (event) {
-                    is MovementPageUiEvent.NavigateToDetail -> {
-                        val intent = Intent(this@ArtMovementActivity, ArtDetailActivity::class.java).apply {
-                            putExtra("artistName", event.artistProfile.artistName)
-                        }
-                        startActivity(intent)
-                    }
-                    is MovementPageUiEvent.ExpandText -> { /* 생략 */ }
-                }
+            if (artistList.isEmpty()) {
+                binding.movementGrid.visibility = View.GONE
+//                binding..visibility = View.VISIBLE
+                Log.d("ArtMovementActivity", "Filtered artist list size: ${artistList.size}")
+            } else {
+                binding.movementGrid.visibility = View.VISIBLE
+//                emptyTextView..visibility = View.GONE
+                artistAdapter.filterList(artistList)
             }
         }
 
+        // 작가 프로필 카드 초기화
         viewModel.loadArtistProfile()
+        Log.d("ArtMovementActivity", "onCreate: ${viewModel.loadArtistProfile()}")
+
+        val artistAdapter = ArtistAdapter(emptyList())
+
+        artistAdapter.onArtistProfileSetOnClickListener(object : ArtistProfileSetOnClickListener {
+            override fun artistItemClickLister(
+                itemData: ArtistProfile,
+                binding: ItemRecyclerviewBinding
+            ) {
+                viewModel.onArtistProfileClicked(itemData)
+            }
+        })
     }
 }
